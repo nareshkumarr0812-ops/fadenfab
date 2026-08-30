@@ -256,8 +256,6 @@ export default function Navbar({
             } else {
               el.scrollIntoView({ behavior: "smooth", block: "start" });
             }
-          } else {
-            router.push(href);
           }
         }
       } else {
