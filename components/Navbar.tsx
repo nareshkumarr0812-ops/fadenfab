@@ -279,48 +279,65 @@ export default function Navbar({
       </div>
       <div className="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 sm:py-4 flex items-center justify-between">
         {/* Logo */}
-        <button
-          onClick={() => router.push("/")}
+        <Link
+          href="/"
           className="text-2xl xs:text-3xl md:text-4xl font-bold tracking-wide text-[#0D4A86] cursor-pointer"
           style={{
             fontFamily: '"American Typewriter","American Typewriter Std",serif',
           }}
+          aria-label="FADENFAB Homepage"
         >
           FADENFAB
-        </button>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-lg font-medium">
           {user && user.id ? (
             // ================= LOGGED IN NAVBAR =================
             <>
-              <button
-                onClick={() => handleNavClick("home", "/")}
+              <Link
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("home", "/");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Home
-              </button>
-              <button
-                onClick={() => handleNavClick("designer", "/#designer")}
+              </Link>
+              <Link
+                href="/#designer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("designer", "/#designer");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Custom Design
-              </button>
-              <button
-                onClick={() => handleNavClick("collection", "/#collection")}
+              </Link>
+              <Link
+                href="/#collection"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("collection", "/#collection");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Shop
-              </button>
-              <button
-                onClick={() => handleNavClick("contact", "/#contact")}
+              </Link>
+              <Link
+                href="/#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("contact", "/#contact");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Contact
-              </button>
+              </Link>
               
               {/* Wishlist Icon */}
-              <Link href="/profile?tab=wishlist" className="hover:text-[#0D4A86] text-slate-700 hover:scale-105 transition flex items-center justify-center relative w-10 h-10" title="Wishlist">
+              <Link href="/profile?tab=wishlist" className="hover:text-[#0D4A86] text-slate-700 hover:scale-105 transition flex items-center justify-center relative w-10 h-10" title="Wishlist" aria-label="Wishlist">
                 <HeartIcon className="w-6 h-6" style={{ width: "24px", height: "24px" }} />
                 {wishlistCount > 0 && (
                   <span className="absolute top-0.5 right-0.5 bg-amber-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-4 text-center animate-fadeIn">
@@ -330,7 +347,7 @@ export default function Navbar({
               </Link>
 
               {/* Cart Icon */}
-              <Link href="/cart" className="hover:text-[#0D4A86] text-slate-700 hover:scale-105 transition flex items-center justify-center relative w-10 h-10" title="Shopping Cart">
+              <Link href="/cart" className="hover:text-[#0D4A86] text-slate-700 hover:scale-105 transition flex items-center justify-center relative w-10 h-10" title="Shopping Cart" aria-label="Shopping Cart">
                 <ShoppingCartIcon className="w-6 h-6" style={{ width: "24px", height: "24px" }} />
                 {cartCount > 0 && (
                   <span className="absolute top-0.5 right-0.5 bg-[#0D4A86] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-4 text-center animate-fadeIn">
@@ -392,30 +409,46 @@ export default function Navbar({
           ) : (
             // ================= LOGGED OUT NAVBAR =================
             <>
-              <button
-                onClick={() => handleNavClick("home", "/")}
+              <Link
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("home", "/");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Home
-              </button>
-              <button
-                onClick={() => handleNavClick("designer", "/#designer")}
+              </Link>
+              <Link
+                href="/#designer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("designer", "/#designer");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Custom Design
-              </button>
-              <button
-                onClick={() => handleNavClick("collection", "/#collection")}
+              </Link>
+              <Link
+                href="/#collection"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("collection", "/#collection");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Shop
-              </button>
-              <button
-                onClick={() => handleNavClick("contact", "/#contact")}
+              </Link>
+              <Link
+                href="/#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick("contact", "/#contact");
+                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Contact
-              </button>
+              </Link>
               <button
                 onClick={() => router.push("/userlogin")}
                 className="bg-[#0D4A86] hover:bg-[#083A6B] text-white px-6 py-2 rounded-full font-semibold transition cursor-pointer"
@@ -531,72 +564,104 @@ export default function Navbar({
             {user && user.id ? (
               // Logged In Mobile Menu
               <>
-                <button
-                  onClick={() => handleNavClick("home", "/")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                <Link
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("home", "/");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Home
-                </button>
+                </Link>
                 <Link
                   href="/profile"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   My Profile
                 </Link>
                 <Link
                   href="/profile?tab=orders"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   My Orders
                 </Link>
-                <button
-                  onClick={() => handleNavClick("designer", "/#designer")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                <Link
+                  href="/#designer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("designer", "/#designer");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Custom Design
-                </button>
-                <button
-                  onClick={() => handleNavClick("collection", "/#collection")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                </Link>
+                <Link
+                  href="/#collection"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("collection", "/#collection");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Shop
-                </button>
-                <button
-                  onClick={() => handleNavClick("contact", "/#contact")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                </Link>
+                <Link
+                  href="/#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("contact", "/#contact");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Contact
-                </button>
+                </Link>
               </>
             ) : (
               // Logged Out Mobile Menu
               <>
-                <button
-                  onClick={() => handleNavClick("home", "/")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                <Link
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("home", "/");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Home
-                </button>
-                <button
-                  onClick={() => handleNavClick("designer", "/#designer")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                </Link>
+                <Link
+                  href="/#designer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("designer", "/#designer");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Custom Design
-                </button>
-                <button
-                  onClick={() => handleNavClick("collection", "/#collection")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                </Link>
+                <Link
+                  href="/#collection"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("collection", "/#collection");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Shop
-                </button>
-                <button
-                  onClick={() => handleNavClick("contact", "/#contact")}
-                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation"
+                </Link>
+                <Link
+                  href="/#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick("contact", "/#contact");
+                  }}
+                  className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Contact
-                </button>
+                </Link>
               </>
             )}
           </div>

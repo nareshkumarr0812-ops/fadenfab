@@ -108,6 +108,7 @@ export default function Footer() {
               <a
                 href="https://wa.me/916374998042"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-green-400 transition"
               >
                 💬 WhatsApp Chat

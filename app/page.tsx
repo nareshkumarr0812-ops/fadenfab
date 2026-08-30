@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, useRef } from "react";
 import Gallery from "../components/Gallery";
+import Image from "next/image";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
 import Testimonials from "../components/Testimonials";
@@ -499,9 +500,12 @@ export default function Home() {
   <div className="relative max-w-7xl mx-auto h-[480px] xs:h-[530px] md:h-[700px] overflow-hidden bg-slate-950 flex items-end">
     {/* Background Image */}
     <div className="absolute inset-0 z-0">
-      <img
+      <Image
         src="/luxury_hero_banner.jpg"
         alt="FADENFAB Bespoke Series"
+        fill
+        priority
+        sizes="100vw"
         className="w-full h-full object-cover object-center opacity-85 transition-transform duration-10000 ease-out hover:scale-105"
       />
       {/* Subtle overlay gradient to keep text readable */}
@@ -702,9 +706,11 @@ export default function Home() {
               {/* Card 1: Hoodie */}
               <div className="bg-white border border-slate-100 p-2 sm:p-4 shadow-md rounded-2xl sm:rounded-3xl w-[44%] sm:w-44 md:w-52 transition-transform duration-500 hover:-translate-y-2">
                 <div className="relative aspect-[3/4] bg-slate-50 border border-slate-100 rounded-xl sm:rounded-2xl overflow-hidden mb-2 sm:mb-3">
-                  <img
+                  <Image
                     src={combos[selectedComboIndex].item1.image}
                     alt={combos[selectedComboIndex].item1.name}
+                    fill
+                    sizes="(max-width: 768px) 44vw, 208px"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -717,9 +723,11 @@ export default function Home() {
               {/* Card 2: Tee */}
               <div className="bg-white border border-slate-100 p-2 sm:p-4 shadow-md rounded-2xl sm:rounded-3xl w-[44%] sm:w-44 md:w-52 transition-transform duration-500 hover:-translate-y-2">
                 <div className="relative aspect-[3/4] bg-slate-50 border border-slate-100 rounded-xl sm:rounded-2xl overflow-hidden mb-2 sm:mb-3">
-                  <img
+                  <Image
                     src={combos[selectedComboIndex].item2.image}
                     alt={combos[selectedComboIndex].item2.name}
+                    fill
+                    sizes="(max-width: 768px) 44vw, 208px"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -1332,7 +1340,7 @@ export default function Home() {
                                 }
                                 const reader = new FileReader();
                                 reader.onloadend = () => {
-                                  const img = new Image();
+                                  const img = new window.Image();
                                   img.src = reader.result as string;
                                   img.onload = () => {
                                     const canvas = document.createElement("canvas");
