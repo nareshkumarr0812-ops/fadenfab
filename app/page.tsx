@@ -44,8 +44,8 @@ function TiltCard({ children, className, isDesktop, ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX: isDesktop ? rX : 0,
-        rotateY: isDesktop ? rY : 0,
+        rotateX: rX,
+        rotateY: rY,
         transformStyle: "preserve-3d",
       }}
       className={className}
@@ -298,14 +298,6 @@ export default function Home() {
     };
   }, []);
 
-  const { scrollY } = useScroll();
-  const bgGlowY1 = useTransform(scrollY, [0, 1000], [0, -100]);
-  const bgGlowY2 = useTransform(scrollY, [0, 2000], [0, 150]);
-  const bgGlowY3 = useTransform(scrollY, [0, 3000], [0, -200]);
-
-  const heroTextY = useTransform(scrollY, [0, 800], [0, 50]);
-  const heroImageY = useTransform(scrollY, [0, 800], [0, -80]);
-
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     setIsDesktop(window.innerWidth >= 1024);
@@ -315,6 +307,11 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const { scrollY } = useScroll();
+  const bgGlowY1 = useTransform(scrollY, [0, 1000], [0, isDesktop ? -100 : 0]);
+  const bgGlowY2 = useTransform(scrollY, [0, 2000], [0, isDesktop ? 150 : 0]);
+  const bgGlowY3 = useTransform(scrollY, [0, 3000], [0, isDesktop ? -200 : 0]);
 
   // Slideshow images matching catalog designs
   const slides = useMemo(() => [
@@ -447,7 +444,7 @@ export default function Home() {
         <div className="fixed inset-0 -z-10 overflow-hidden">
 
   <motion.div
-    style={{ y: isDesktop ? bgGlowY1 : 0 }}
+    style={{ y: bgGlowY1 }}
     className="
       absolute
       -top-40
@@ -461,7 +458,7 @@ export default function Home() {
   />
 
   <motion.div
-    style={{ y: isDesktop ? bgGlowY2 : 0 }}
+    style={{ y: bgGlowY2 }}
     className="
       absolute
       top-1/3
@@ -475,7 +472,7 @@ export default function Home() {
   />
 
   <motion.div
-    style={{ y: isDesktop ? bgGlowY3 : 0 }}
+    style={{ y: bgGlowY3 }}
     className="
       absolute
       bottom-0
