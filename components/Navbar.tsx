@@ -152,14 +152,11 @@ export default function Navbar({
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.classList.add("mobile-menu-active");
-      document.body.style.overflow = "hidden";
     } else {
       document.body.classList.remove("mobile-menu-active");
-      document.body.style.overflow = "";
     }
     return () => {
       document.body.classList.remove("mobile-menu-active");
-      document.body.style.overflow = "";
     };
   }, [mobileMenuOpen]);
 
@@ -227,41 +224,38 @@ export default function Navbar({
 
   // ================= NAVIGATION =================
   const handleNavClick = (sectionId: string, href: string) => {
-    // 1. Instantly start closing the mobile drawer transition
+    // 1. Instantly close the mobile drawer
     setMobileMenuOpen(false);
 
-    // 2. Defer scroll animation by 250ms to allow the drawer transition to fully complete,
-    // avoiding iOS/WebKit graphics thread collisions and browser lockups.
-    setTimeout(() => {
-      if (pathname === "/") {
-        const isMobileOrSafari = typeof window !== "undefined" && (
-          window.innerWidth < 1024 ||
-          /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
-          /iPad|iPhone|iPod/.test(navigator.userAgent)
-        );
+    // 2. Perform scroll jump instantly (0ms delay) to prevent layout and touch lockups
+    if (pathname === "/") {
+      const isMobileOrSafari = typeof window !== "undefined" && (
+        window.innerWidth < 1024 ||
+        /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
+        /iPad|iPhone|iPod/.test(navigator.userAgent)
+      );
 
-        if (sectionId === "home") {
-          if (isMobileOrSafari) {
-            window.scrollTo({ top: 0 });
-          } else {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
+      if (sectionId === "home") {
+        if (isMobileOrSafari) {
+          window.scrollTo({ top: 0 });
         } else {
-          const el = document.getElementById(sectionId);
-          if (el) {
-            if (isMobileOrSafari) {
-              const yOffset = -96; // Matches scroll-mt-24
-              const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-              window.scrollTo({ top: y });
-            } else {
-              el.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-          }
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       } else {
-        router.push(href);
+        const el = document.getElementById(sectionId);
+        if (el) {
+          if (isMobileOrSafari) {
+            const yOffset = -96; // Matches scroll-mt-24
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y });
+          } else {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
       }
-    }, 250);
+    } else {
+      router.push(href);
+    }
   };
 
   // Extract first name
