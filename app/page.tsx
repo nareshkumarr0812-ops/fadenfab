@@ -2,12 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, useRef } from "react";
-import Gallery from "../components/Gallery";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import Footer from "../components/Footer";
-import Contact from "../components/Contact";
-import Testimonials from "../components/Testimonials";
-import { HiMenu, HiX } from "react-icons/hi";
+
+const Gallery = dynamic(() => import("../components/Gallery"));
+const Footer = dynamic(() => import("../components/Footer"));
+const Contact = dynamic(() => import("../components/Contact"));
+const Testimonials = dynamic(() => import("../components/Testimonials"));
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { getCatalog } from "@/lib/products";
