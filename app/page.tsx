@@ -424,6 +424,7 @@ export default function Home() {
   <motion.div
     style={{ y: bgGlowY1 }}
     className="
+      hidden lg:block
       absolute
       -top-40
       -left-32
@@ -438,6 +439,7 @@ export default function Home() {
   <motion.div
     style={{ y: bgGlowY2 }}
     className="
+      hidden lg:block
       absolute
       top-1/3
       -right-32
@@ -452,6 +454,7 @@ export default function Home() {
   <motion.div
     style={{ y: bgGlowY3 }}
     className="
+      hidden lg:block
       absolute
       bottom-0
       left-1/3
