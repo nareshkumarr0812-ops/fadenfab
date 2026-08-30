@@ -90,14 +90,13 @@ export default function Navbar({
 
   // ================= COUNTERS SYNC =================
   const updateCounts = useCallback(async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user && user.id) {
-      // Cart Count
-      const cart = JSON.parse(localStorage.getItem("fadenfab_cart") || "[]");
-      const totalQty = cart.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
-      setCartCount(totalQty);
+    // 1. Cart Count is stored locally and runs instantly for both logged-in and guest users
+    const cart = JSON.parse(localStorage.getItem("fadenfab_cart") || "[]");
+    const totalQty = cart.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
+    setCartCount(totalQty);
 
-      // Wishlist Count
+    // 2. Wishlist count is fetched asynchronously only if user is logged in
+    if (user && user.email) {
       const { data } = await supabase
         .from("leads")
         .select("id")
@@ -105,10 +104,9 @@ export default function Navbar({
         .eq("email", user.email);
       setWishlistCount(data?.length || 0);
     } else {
-      setCartCount(0);
       setWishlistCount(0);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     updateCounts();
@@ -120,7 +118,7 @@ export default function Navbar({
       window.removeEventListener("cart-updated", updateCounts);
       window.removeEventListener("wishlist-updated", updateCounts);
     };
-  }, [updateCounts, user]);
+  }, [updateCounts]);
 
   // ================= DROPDOWN CLOSE OUTSIDE =================
   useEffect(() => {

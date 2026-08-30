@@ -41,8 +41,8 @@ function TiltCard({ children, className, isDesktop, ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX: isDesktop ? rX : 0,
-        rotateY: isDesktop ? rY : 0,
+        rotateX: rX,
+        rotateY: rY,
         transformStyle: "preserve-3d",
       }}
       className={className}

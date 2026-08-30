@@ -313,30 +313,7 @@ export default function Home() {
   const bgGlowY2 = useTransform(scrollY, [0, 2000], [0, isDesktop ? 150 : 0]);
   const bgGlowY3 = useTransform(scrollY, [0, 3000], [0, isDesktop ? -200 : 0]);
 
-  // Slideshow images matching catalog designs
-  const slides = useMemo(() => [
-    "/classicneverdies.webp",
-    "/findyourcanvas2.webp",
-    "/FutureVision_1.webp"
-  ], []);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Auto-slide logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const handlePrevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
 
   const handleAddLookToCart = () => {
     supabase.auth.getUser().then(({ data: { user } }) => {

@@ -34,8 +34,8 @@ function TiltCard({ children, className, isDesktop, ...props }: any) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX: isDesktop ? rX : 0,
-        rotateY: isDesktop ? rY : 0,
+        rotateX: rX,
+        rotateY: rY,
         transformStyle: "preserve-3d",
       }}
       className={className}
@@ -118,7 +118,6 @@ export default function Gallery() {
                 className={`object-cover transition-transform duration-1000 ease-out ${
                   item.comingSoon ? "grayscale brightness-90" : "group-hover:scale-105"
                 }`}
-                priority
               />
 
               {/* Luxury dark gradient overlay for blending typography */}
