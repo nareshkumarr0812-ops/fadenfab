@@ -222,41 +222,7 @@ export default function Navbar({
     };
   }, [user]);
 
-  // ================= NAVIGATION =================
-  const handleNavClick = (sectionId: string, href: string) => {
-    // 1. Instantly close the mobile drawer
-    setMobileMenuOpen(false);
 
-    // 2. Perform scroll jump instantly (0ms delay) to prevent layout and touch lockups
-    if (pathname === "/") {
-      const isMobileOrSafari = typeof window !== "undefined" && (
-        window.innerWidth < 1024 ||
-        /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
-        /iPad|iPhone|iPod/.test(navigator.userAgent)
-      );
-
-      if (sectionId === "home") {
-        if (isMobileOrSafari) {
-          window.scrollTo({ top: 0 });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      } else {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          if (isMobileOrSafari) {
-            const yOffset = -96; // Matches scroll-mt-24
-            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y });
-          } else {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }
-      }
-    } else {
-      router.push(href);
-    }
-  };
 
   // Extract first name
   const firstName = profile?.full_name?.split(" ")[0] || user?.user_metadata?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "User";
@@ -291,40 +257,24 @@ export default function Navbar({
             <>
               <Link
                 href="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("home", "/");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Home
               </Link>
               <Link
                 href="/#designer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("designer", "/#designer");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Custom Design
               </Link>
               <Link
                 href="/#collection"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("collection", "/#collection");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Shop
               </Link>
               <Link
                 href="/#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("contact", "/#contact");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Contact
@@ -405,40 +355,24 @@ export default function Navbar({
             <>
               <Link
                 href="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("home", "/");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Home
               </Link>
               <Link
                 href="/#designer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("designer", "/#designer");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Custom Design
               </Link>
               <Link
                 href="/#collection"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("collection", "/#collection");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Shop
               </Link>
               <Link
                 href="/#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick("contact", "/#contact");
-                }}
                 className="hover:text-[#0D4A86] transition cursor-pointer"
               >
                 Contact
@@ -560,10 +494,7 @@ export default function Navbar({
               <>
                 <Link
                   href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("home", "/");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Home
@@ -584,30 +515,21 @@ export default function Navbar({
                 </Link>
                 <Link
                   href="/#designer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("designer", "/#designer");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Custom Design
                 </Link>
                 <Link
                   href="/#collection"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("collection", "/#collection");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Shop
                 </Link>
                 <Link
                   href="/#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("contact", "/#contact");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Contact
@@ -618,40 +540,28 @@ export default function Navbar({
               <>
                 <Link
                   href="/"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("home", "/");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Home
                 </Link>
                 <Link
                   href="/#designer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("designer", "/#designer");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Custom Design
                 </Link>
                 <Link
                   href="/#collection"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("collection", "/#collection");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Shop
                 </Link>
                 <Link
                   href="/#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("contact", "/#contact");
-                  }}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left px-8 py-4 hover:bg-[#0D4A86]/5 hover:text-[#0D4A86] transition font-medium cursor-pointer touch-manipulation block"
                 >
                   Contact
